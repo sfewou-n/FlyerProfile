@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Capabilities & Expertise</title>
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --neon-blue: #38bdf8;
+            --neon-green: #4ade80;
+            --neon-purple: #c084fc;
+            --neon-amber: #fbbf24;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 1rem;
+        }
+
+        .flyer-container {
+            max-width: 900px;
+            width: 100%;
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .filter-bar {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-muted);
+            padding: 0.5rem 1.25rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-main);
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.75rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card[data-category="security"]:hover {
+            border-color: var(--neon-purple);
+            box-shadow: 0 10px 25px rgba(192, 132, 252, 0.2);
+        }
+
+        .card[data-category="dev"]:hover {
+            border-color: var(--neon-blue);
+            box-shadow: 0 10px 25px rgba(56, 189, 248, 0.2);
+        }
+
+        .card[data-category="devops"]:hover {
+            border-color: var(--neon-green);
+            box-shadow: 0 10px 25px rgba(74, 222, 128, 0.2);
+        }
+
+        .card[data-category="aws"]:hover {
+            border-color: var(--neon-amber);
+            box-shadow: 0 10px 25px rgba(251, 191, 36, 0.2);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+        }
+
+        .footer {
+            margin-top: 2.5rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="flyer-container">
+        <header class="header">
+            <h1>Technical Expertise & Capabilities</h1>
+            <p>Cloud Architecture • System Security • Automation • Full-Stack Development</p>
+        </header>
+
+        <div class="filter-bar">
+            <button class="filter-btn active" onclick="filterCards('all')">All Domains</button>
+            <button class="filter-btn" onclick="filterCards('security')">Cybersecurity</button>
+            <button class="filter-btn" onclick="filterCards('dev')">Software Dev</button>
+            <button class="filter-btn" onclick="filterCards('devops')">DevOps</button>
+            <button class="filter-btn" onclick="filterCards('aws')">AWS Cloud</button>
+        </div>
+
+        <div class="grid">
+            <!-- Cybersecurity Card -->
+            <div class="card" data-category="security">
+                <div class="card-icon" style="color: var(--neon-purple);">🛡️</div>
+                <h3>Cybersecurity</h3>
+                <p>Information security operations, risk analysis, compliance controls, and threat monitoring.</p>
+                <div class="tags">
+                    <span class="tag">InfoSec</span>
+                    <span class="tag">Access Control</span>
+                    <span class="tag">SIEM</span>
+                    <span class="tag">Compliance</span>
+                </div>
+            </div>
+
+            <!-- Software Dev Card -->
+            <div class="card" data-category="dev">
+                <div class="card-icon" style="color: var(--neon-blue);">💻</div>
+                <h3>Software Engineering</h3>
+                <p>Building responsive web solutions, interactive DOM manipulation, and clean API integrations.</p>
+                <div class="tags">
+                    <span class="tag">JavaScript</span>
+                    <span class="tag">HTML5 / CSS3</span>
+                    <span class="tag">Git</span>
+                    <span class="tag">REST APIs</span>
+                </div>
+            </div>
+
+            <!-- DevOps Card -->
+            <div class="card" data-category="devops">
+                <div class="card-icon" style="color: var(--neon-green);">⚡</div>
+                <h3>DevOps & Automation</h3>
+                <p>Streamlining CI/CD pipelines, container orchestration, and Infrastructure as Code workflows.</p>
+                <div class="tags">
+                    <span class="tag">Docker</span>
+                    <span class="tag">Kubernetes</span>
+                    <span class="tag">Jenkins</span>
+                    <span class="tag">Terraform</span>
+                </div>
+            </div>
+
+            <!-- AWS Cloud Card -->
+            <div class="card" data-category="aws">
+                <div class="card-icon" style="color: var(--neon-amber);">☁️</div>
+                <h3>AWS Cloud Architecture</h3>
+                <p>Designing secure, scalable, and highly available cloud infrastructure on Amazon Web Services.</p>
+                <div class="tags">
+                    <span class="tag">EC2</span>
+                    <span class="tag">S3</span>
+                    <span class="tag">VPC</span>
+                    <span class="tag">IAM</span>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>Ready to collaborate? Let's connect and build secure, scalable systems.</p>
+        </footer>
+    </div>
+
+    <script>
+        function filterCards(category) {
+            const cards = document.querySelectorAll('.card');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            // Update active button state
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Filter cards with smooth opacity transition
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'block';
+                    setTimeout(() => { card.style.opacity = '1'; card.style.transform = 'translateY(0)'; }, 50);
+                } else {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(10px)';
+                    setTimeout(() => { card.style.display = 'none'; }, 300);
+                }
+            });
+        }
+    </script>
+</body>
+</html>
